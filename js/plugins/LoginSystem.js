@@ -47,7 +47,7 @@ var LoginSystem = LoginSystem || {};
 
     function loginUser(username, password) {
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", window.location.pathname, true);
+        xhr.open("POST", "login-system/src/login.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhr.onload = function() {
@@ -58,7 +58,7 @@ var LoginSystem = LoginSystem || {};
                     localStorage.setItem("currentUser", response.username);
                     window.location.href = "/RPGProject/Project1/index.html";
                 } else {
-                    alert("Login Failed: " + response.message);
+                    console.error("Login Failed:", response.message);
                 }
             } catch (e) {
                 console.error("Error parsing response:", e);
@@ -68,7 +68,7 @@ var LoginSystem = LoginSystem || {};
         const data = new URLSearchParams();
         data.append('username', username);
         data.append('password', password);
-        xhr.send(data.toString());
+        xhr.send(data);
     }
 
     // Make sure to expose the function globally
